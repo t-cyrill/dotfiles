@@ -14,6 +14,8 @@ DOTFILES="${HOME}/dotfiles"
 ZSH_ROOT="${DOTFILES}/zsh"
 HISTFILE="${ZSH_ROOT}/history/.zsh_history"
 
+mkdir -p "${ZSH_ROOT}/history"
+
 # Use modern completion system
 autoload -Uz compinit
 compinit -d "${ZSH_ROOT}/.zcompdump"
@@ -34,7 +36,7 @@ echo $FILES | while read -r file; do
   [ -f "$file" ] && source "$file"
 done
 
-[ ${STY} ] || screen -rx || screen -D -RR
+type "screen" > /dev/null && ([ ${STY} ] || screen -rx || screen -D -RR)
 
 # command_stack
 show_buffer_stack() {
